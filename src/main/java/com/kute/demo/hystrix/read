@@ -1,0 +1,10 @@
+1. 帮助解决分布式系统交互时超时处理和容错的类库, 它同样拥有保护系统的能力.
+
+2. Hystrix使用命令模式(继承HystrixCommand类)来包裹具体的服务调用逻辑(run方法),
+并在命令模式中添加了服务调用失败后的降级逻辑(getFallback).
+
+3. http://www.jianshu.com/p/39763a0bd9b8
+
+4. http://blog.csdn.net/mrtitan/article/details/51565074
+
+5. http://blog.csdn.net/xiao_jun_0820/article/details/78423985
