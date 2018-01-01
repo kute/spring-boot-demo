@@ -22,7 +22,7 @@ public class UserInterceptor {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Around("execution(* com.kute.demo.controller..*(..))")
+    @Around("execution(* com.kute.demo.config.controller..*(..))")
     public Object controllerPointcut(ProceedingJoinPoint pjp){
 
         logger.info("Begin go in around pointcut...");
@@ -40,7 +40,7 @@ public class UserInterceptor {
         return result;
     }
 
-    @Before("execution(* com.kute.demo.controller..*(..))")
+    @Before("execution(* com.kute.demo.config.controller..*(..))")
     public void beforePointcut(JoinPoint joinPoint) {
         logger.info("Before pointcut ....");
     }

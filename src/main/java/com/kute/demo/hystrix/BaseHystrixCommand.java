@@ -21,31 +21,32 @@ public class BaseHystrixCommand extends HystrixCommand<String> {
 
     private RestTemplate restTemplate;
 
+    private static final Setter setter = Setter
+            .withGroupKey(HystrixCommandGroupKey.Factory.asKey("hystrix.command.http"))
+            .andCommandKey(HystrixCommandKey.Factory.asKey("hystrix.command.http"))
+            .andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey("hystrix.command.http"))
+            .andCommandPropertiesDefaults(
+                    HystrixCommandProperties.Setter()
 
-    protected BaseHystrixCommand(RestTemplate restTemplate, String url, String key, String method) {
-        super(Setter
-                .withGroupKey(HystrixCommandGroupKey.Factory.asKey("hystrix.command.http"))
-                .andCommandKey(HystrixCommandKey.Factory.asKey("hystrix.command.http"))
-                .andThreadPoolKey(HystrixThreadPoolKey.Factory.asKey("hystrix.command.http"))
-                .andCommandPropertiesDefaults(
-                        HystrixCommandProperties.Setter()
+                            //设置断路器是否打开的错误请求阀值
+                            .withCircuitBreakerRequestVolumeThreshold(2)
+                                    //设置 在回路被打开，拒绝请求到再次尝试请求并决定回路是否继续打开的时间
+                            .withCircuitBreakerSleepWindowInMilliseconds(60 * 1000)
+                                    //设置 当错误率%达到多少时断路器打开
+                            .withCircuitBreakerErrorThresholdPercentage(20)
+                            .withFallbackEnabled(true)
+                                    //隔离策略:固定大小线程池
+                            .withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.THREAD)
+                                    //设置是否在超时时开启中断:默认true
+                            .withExecutionIsolationThreadInterruptOnTimeout(true)
+                                    //设置启用超时时间设置:默认 true
+                            .withExecutionTimeoutEnabled(true)
+                                    //执行的超时时间设置
+                            .withExecutionTimeoutInMilliseconds(5000)
+            );
 
-                                        //设置断路器是否打开的错误请求阀值
-                                .withCircuitBreakerRequestVolumeThreshold(2)
-                                        //设置 在回路被打开，拒绝请求到再次尝试请求并决定回路是否继续打开的时间
-                                .withCircuitBreakerSleepWindowInMilliseconds(60 * 1000)
-                                        //设置 当错误率%达到多少时断路器打开
-                                .withCircuitBreakerErrorThresholdPercentage(20)
-                                .withFallbackEnabled(true)
-                                        //隔离策略:固定大小线程池
-                                .withExecutionIsolationStrategy(HystrixCommandProperties.ExecutionIsolationStrategy.THREAD)
-                                        //设置是否在超时时开启中断:默认true
-                                .withExecutionIsolationThreadInterruptOnTimeout(true)
-                                        //设置启用超时时间设置:默认 true
-                                .withExecutionTimeoutEnabled(true)
-                                        //执行的超时时间设置
-                                .withExecutionTimeoutInMilliseconds(5000)
-                ));
+    public BaseHystrixCommand(RestTemplate restTemplate, String url, String key, String method) {
+        super(setter);
         this.restTemplate = restTemplate;
         this.url = url;
         this.key = key;

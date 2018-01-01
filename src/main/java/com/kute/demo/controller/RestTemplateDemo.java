@@ -1,14 +1,14 @@
-package com.kute.demo.http.resttemplate;
+package com.kute.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kute.demo.po.UserData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
  */
 
 @RestController
+@RequestMapping("/rest")
 public class RestTemplateDemo {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -49,7 +50,7 @@ public class RestTemplateDemo {
         return null;
     }
 
-    @GetMapping("/rest/api")
+    @GetMapping("/api")
     public String get2() {
         String url = "https://api.cdnjs.com/libraries/1140";
         try {

@@ -1,10 +1,12 @@
-package com.kute.demo.hystrix;
+package com.kute.demo.controller;
 
 import com.google.common.collect.Lists;
+import com.kute.demo.hystrix.BaseHystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import rx.Observable;
@@ -19,6 +21,7 @@ import java.util.concurrent.TimeUnit;
  * Created by kute on 2017/12/10.
  */
 @RestController
+@RequestMapping("/hystrix")
 public class RequestController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
@@ -33,7 +36,7 @@ public class RequestController {
      * @return
      * @throws Exception
      */
-    @GetMapping("/hystrix")
+    @GetMapping("/")
     public String get() throws Exception{
         BaseHystrixCommand command = new BaseHystrixCommand(restTemplate, url, "mykey", "GET");
         String result = command.execute();
