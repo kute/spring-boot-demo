@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelloController {
 
     @GetMapping("/")
-    public void hello() throws Exception{
+    public String hello() throws Exception{
         throw new Exception("Illegal exception");
     }
 
