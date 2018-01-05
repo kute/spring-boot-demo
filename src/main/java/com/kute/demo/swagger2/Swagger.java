@@ -37,6 +37,7 @@ public class Swagger {
     @Bean
     public Docket createApi() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("spring boot demo api")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.any())
