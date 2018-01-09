@@ -19,7 +19,7 @@ public class CurrentTimeTask {
 
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
-        logger.info("现在时间：{}", dateFormat.format(new Date()));
+        logger.debug("现在时间：{}", dateFormat.format(new Date()));
     }
 
 }

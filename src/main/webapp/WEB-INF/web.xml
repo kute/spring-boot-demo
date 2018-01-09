@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <webapp>
 
+    <listener>
+        <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+    </listener>
+
     <filter>
         <display-name>HystrixRequestContextServletFilter</display-name>
         <filter-name>HystrixRequestContextServletFilter</filter-name>

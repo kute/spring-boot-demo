@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -16,20 +17,21 @@ import java.lang.reflect.Method;
 /**
  * Created by kute on 2017/12/9.
  */
+@Order(10)
 @Aspect
 @Component
 public class UserInterceptor {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Around("execution(* com.kute.demo.config.controller..*(..))")
+    @Around("execution(* com.kute.demo.controller..*(..))")
     public Object controllerPointcut(ProceedingJoinPoint pjp){
 
-        logger.info("Begin go in around pointcut...");
+        logger.debug("Begin go in around pointcut...");
         MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
         Method method = methodSignature.getMethod();
         String methodName = method.getName();
-        logger.info("Around get method name [{}] execute .....", methodName);
+        logger.debug("Around get method name [{}] execute .....", methodName);
 
         Object result = null;
         try {
@@ -40,9 +42,9 @@ public class UserInterceptor {
         return result;
     }
 
-    @Before("execution(* com.kute.demo.config.controller..*(..))")
+    @Before("execution(* com.kute.demo.controller..*(..))")
     public void beforePointcut(JoinPoint joinPoint) {
-        logger.info("Before pointcut ....");
+        logger.debug("Before pointcut ....");
     }
 
 }
