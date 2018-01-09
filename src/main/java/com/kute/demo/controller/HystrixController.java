@@ -2,6 +2,7 @@ package com.kute.demo.controller;
 
 import com.google.common.collect.Lists;
 import com.kute.demo.hystrix.BaseHystrixCommand;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by kute on 2017/12/10.
  */
+@Api(value = "Hystrix测试controller")
 @RestController
 @RequestMapping("/hystrix")
-public class RequestController {
+public class HystrixController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
