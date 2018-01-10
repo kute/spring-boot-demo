@@ -28,6 +28,7 @@ public class BatchConfiguration {
     public Step step1() {
         return stepBuilderFactory.get("step1")
                 .tasklet((stepContribution, chunkContext) -> {
+                    logger.info("job execute {}", chunkContext.getStepContext().getId());
                     return null;
                 })
                 .build();
