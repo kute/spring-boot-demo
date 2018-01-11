@@ -1,3 +1,21 @@
 1. http://projects.spring.io/spring-batch/
 
-2.
+2. https://docs.spring.io/spring-batch/trunk/reference/html/index.html
+
+3. EnableBatchProcessing会自动注入如下bean(见 SimpleBatchConfiguration)
+
+JobRepository - bean name "jobRepository"
+
+JobLauncher - bean name "jobLauncher"
+
+JobRegistry - bean name "jobRegistry"
+
+PlatformTransactionManager - bean name "transactionManager"
+
+JobBuilderFactory - bean name "jobBuilders"
+
+StepBuilderFactory - bean name "stepBuilders"
+
+5. default BatchConfigurer the context must contain no more thanone DataSource
+
+6.

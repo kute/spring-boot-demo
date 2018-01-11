@@ -1,0 +1,9 @@
+1. jdbcTemplate
+
+https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/jdbc/core/JdbcTemplate.html
+
+2. https://docs.spring.io/spring-boot/docs/current/reference/html/howto-data-access.html#howto-configure-a-datasource
+
+3. https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html#boot-features-sql
+
+

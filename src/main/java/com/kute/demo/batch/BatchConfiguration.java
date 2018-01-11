@@ -3,6 +3,7 @@ package com.kute.demo.batch;
 import org.slf4j.Logger;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
@@ -13,12 +14,13 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created by kute on 2018/1/10.
  */
+//@EnableBatchProcessing
 @Configuration
 public class BatchConfiguration {
 
     private final Logger logger = org.slf4j.LoggerFactory.getLogger(getClass());
 
-    @Autowired
+    /*@Autowired
     private JobBuilderFactory jobBuilderFactory;
 
     @Autowired
@@ -40,5 +42,5 @@ public class BatchConfiguration {
                 .incrementer(new RunIdIncrementer())
                 .start(step1)
                 .build();
-    }
+    }*/
 }

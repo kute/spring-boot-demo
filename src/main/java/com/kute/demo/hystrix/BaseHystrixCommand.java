@@ -1,7 +1,6 @@
 package com.kute.demo.hystrix;
 
 import com.alibaba.fastjson.JSONObject;
-import com.kute.demo.cache.CacheUtil;
 import com.kute.demo.po.UserData;
 import com.netflix.hystrix.*;
 import org.slf4j.Logger;

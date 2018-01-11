@@ -1,4 +1,4 @@
-package com.kute.demo.cache;
+package com.kute.demo.hystrix;
 
 import com.google.common.cache.*;
 import com.kute.demo.po.UserData;
