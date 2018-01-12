@@ -25,7 +25,8 @@ public class DataSourceProvider {
 
     @Bean(name = "masterJdbcTemplate")
     @Primary // 使用 主 数据源
-    public JdbcTemplate masterJdbcTemplate(DataSource dataSource) throws SQLException{
+    public JdbcTemplate masterJdbcTemplate() throws SQLException{
+        DataSource dataSource = masterDataSource();
         logger.info("master jdbctemplate datasource url:{}", dataSource.getConnection().getMetaData().getURL());
         return new JdbcTemplate(dataSource);
     }
@@ -34,7 +35,7 @@ public class DataSourceProvider {
      * 返回标准的datasource
      * @return
      */
-    @Bean
+    @Bean(name = "masterDataSource")
     @Primary // 标示 为 主 数据源
     @ConfigurationProperties(prefix = "mysql.datasource.master")
     public DataSource masterDataSource() {

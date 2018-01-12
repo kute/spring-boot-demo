@@ -8,7 +8,6 @@ public class Person {
     private String firstName;
 
     public Person() {
-
     }
 
     public Person(String firstName, String lastName) {
@@ -34,7 +33,9 @@ public class Person {
 
     @Override
     public String toString() {
-        return "firstName: " + firstName + ", lastName: " + lastName;
+        return "Person{" +
+                "lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                '}';
     }
-
 }

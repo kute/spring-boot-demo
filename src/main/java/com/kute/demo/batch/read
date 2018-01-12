@@ -2,6 +2,8 @@
 
 2. https://docs.spring.io/spring-batch/trunk/reference/html/index.html
 
+api: https://docs.spring.io/spring-batch/trunk/apidocs/index.html
+
 3. EnableBatchProcessing会自动注入如下bean(见 SimpleBatchConfiguration)
 
 JobRepository - bean name "jobRepository"
@@ -18,4 +20,8 @@ StepBuilderFactory - bean name "stepBuilders"
 
 5. default BatchConfigurer the context must contain no more thanone DataSource
 
-6.
+https://stackoverflow.com/questions/25540502/use-of-multiple-datasources-in-spring-batch
+
+6. https://spring.io/guides/gs/batch-processing/
+
+7. http://blog.jobbole.com/109857/
