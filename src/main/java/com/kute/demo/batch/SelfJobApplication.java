@@ -3,7 +3,6 @@ package com.kute.demo.batch;
 import com.kute.demo.batch.listener.*;
 import com.kute.demo.po.Person;
 import org.slf4j.Logger;
-import org.springframework.batch.core.ItemWriteListener;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.*;
@@ -16,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.naming.ServiceUnavailableException;
 import javax.sql.DataSource;
 
 /**
@@ -69,6 +69,12 @@ public class SelfJobApplication {
     private SelfStepExecutionListener selfStepExecutionListener;
 
     @Autowired
+    private SelfRetryListener selfRetryListener;
+
+    @Autowired
+    private SelfSkipListener selfSkipListener;
+
+    @Autowired
     private SelfItemListener selfItemListener;
 
     /**
@@ -91,8 +97,18 @@ public class SelfJobApplication {
                 .listener(selfItemReadListener)
                 .listener(selfItemProcessListener)
                 .listener(selfItemWritelistener)
-//                .listener(selfChunkListener)
-//                .listener(selfStepExecutionListener)
+//                配置容错 retry  skip
+                .faultTolerant()
+//                对于 failed items ,在此step失败前,设置最大跳过的个数
+                .skipLimit(10)
+//                申明 如果发生此异常则skip
+                .skip(ServiceUnavailableException.class)
+//                设置重试上限
+                .retryLimit(10)
+                .retry(ServiceUnavailableException.class)
+                .listener(selfChunkListener)
+                .listener(selfRetryListener)
+                .listener(selfSkipListener)
                 .build();
     }
 

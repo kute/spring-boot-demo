@@ -17,17 +17,16 @@ public class SelfSkipListener implements SkipListener<Throwable, String> {
 
     @Override
     public void onSkipInRead(Throwable throwable) {
-
-
+        logger.debug("onSkipInRead:{}", throwable.getMessage());
     }
 
     @Override
     public void onSkipInWrite(String s, Throwable throwable) {
-
+        logger.debug("onSkipInWrite:{},{}", s, throwable.getMessage());
     }
 
     @Override
     public void onSkipInProcess(Throwable throwable, Throwable throwable2) {
-
+        logger.debug("onSkipInProcess,{},{}", throwable.getMessage(), throwable2.getMessage());
     }
 }
