@@ -35,6 +35,6 @@ handle $local_dir;
 ##复制java文件到指定位置
 if [ -d $java_dir ]
 then
-    cp -r $java_dir/*  $java_dir/../../java;
+    cp -r $java_dir/*  $java_dir/../../../java;
     rm -r $java_dir;
 fi
