@@ -1,5 +1,6 @@
 package com.kute.demo.rpc.thrift.client;
 
+import com.kute.demo.rpc.thrift.domain.ResponseCode;
 import com.kute.demo.rpc.thrift.service.HelloWorldService;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -22,7 +23,7 @@ public class HelloWorldClient {
             HelloWorldService.Client client = new HelloWorldService.Client(
                     protocol);
             transport.open();
-            String result = client.sayHello(userName);
+            ResponseCode result = client.sayHello(userName);
             System.out.println("Thrify client result =: " + result);
         } catch (TTransportException e) {
             e.printStackTrace();

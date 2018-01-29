@@ -5,6 +5,7 @@ import com.kute.demo.rpc.thrift.service.impl.HelloWorldServiceImpl;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
+import org.apache.thrift.server.TThreadedSelectorServer;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TTransportException;
 
@@ -14,6 +15,10 @@ import java.net.ServerSocket;
 public class HelloWorldServer {
 
     public static void main(String[] args) throws IOException, TTransportException {
+        System.out.println(8 | 16);
+    }
+
+    public static void testSimpleServer() throws IOException, TTransportException {
 
         final int SERVER_PORT = 8090;
 
@@ -33,7 +38,7 @@ public class HelloWorldServer {
 
     }
 
-    public static void testSimpleServer() {
+    public static void test(TServer.Args tArgs) throws IOException, TTransportException {
 
     }
 }
