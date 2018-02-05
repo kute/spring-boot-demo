@@ -20,6 +20,6 @@ public class DisposableBeanTester implements DisposableBean {
 
     @Override
     public void destroy() throws Exception {
-        LOGGER.info("destroy before all bean destroy");
+        LOGGER.debug("spring interface destroy before all bean destroy");
     }
 }

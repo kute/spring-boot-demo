@@ -20,6 +20,6 @@ public class InitializingBeanTester implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        LOGGER.info("afterPropertiesSet after all bean init over");
+        LOGGER.debug("spring interface afterPropertiesSet after all bean init over");
     }
 }

@@ -21,18 +21,19 @@ import java.beans.PropertyDescriptor;
  之前的BeanPostProcessor作用于过程（2）前后，现在的InstantiationAwareBeanPostProcessor则作用于过程（1）前后
 
  */
-@Component
 public class InstantiationAwareBeanPostProcessorTester implements InstantiationAwareBeanPostProcessor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InstantiationAwareBeanPostProcessorTester.class);
 
     @Override
     public Object postProcessBeforeInstantiation(Class<?> aClass, String beanName) throws BeansException {
+        LOGGER.debug("spring interface postProcessBeforeInstantiation:{}-{}", aClass.getSimpleName(), beanName);
         return aClass;
     }
 
     @Override
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
+        LOGGER.debug("spring interface postProcessAfterInstantiation :{}-{}", bean.getClass().getSimpleName(), beanName);
         return false;
     }
 
@@ -40,16 +41,19 @@ public class InstantiationAwareBeanPostProcessorTester implements InstantiationA
     public PropertyValues postProcessPropertyValues(PropertyValues propertyValues,
                                                     PropertyDescriptor[] propertyDescriptors, Object bean,
                                                     String beanName) throws BeansException {
+        LOGGER.debug("spring interface postProcessPropertyValues");
         return propertyValues;
     }
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        LOGGER.debug("spring interface postProcessBeforeInitialization:{}-{}", bean.getClass().getSimpleName(), beanName);
         return bean;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        LOGGER.debug("spring interface postProcessAfterInitialization:{}-{}", bean.getClass().getSimpleName(), beanName);
         return bean;
     }
 }

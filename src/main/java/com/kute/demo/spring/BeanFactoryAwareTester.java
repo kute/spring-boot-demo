@@ -18,6 +18,6 @@ public class BeanFactoryAwareTester implements BeanFactoryAware {
 
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        LOGGER.info("setBeanFactory beanFactory:{}", beanFactory.getClass().getSimpleName());
+        LOGGER.debug("spring interface setBeanFactory beanFactory:{}", beanFactory.getClass().getSimpleName());
     }
 }

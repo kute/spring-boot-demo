@@ -4,11 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.stereotype.Component;
 
 /**
  * created by kute on 2018-02-05 20:01
  * Bean 预处理
  */
+@Component
 public class BeanPostProcessorTester implements BeanPostProcessor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BeanPostProcessorTester.class);
@@ -22,7 +24,7 @@ public class BeanPostProcessorTester implements BeanPostProcessor {
      */
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        LOGGER.info("postProcessBeforeInitialization bean={}, beanName={}", bean, beanName);
+        LOGGER.debug("spring interface postProcessBeforeInitialization bean={}, beanName={}", bean, beanName);
         return bean;
     }
 
@@ -35,7 +37,7 @@ public class BeanPostProcessorTester implements BeanPostProcessor {
      */
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        LOGGER.info("postProcessAfterInitialization bean={}, beanName={}", bean, beanName);
+        LOGGER.debug("spring interface postProcessAfterInitialization bean={}, beanName={}", bean.getClass().getSimpleName(), beanName);
         return bean;
     }
 }
