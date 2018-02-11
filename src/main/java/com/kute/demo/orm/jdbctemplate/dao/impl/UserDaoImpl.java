@@ -1,6 +1,6 @@
-package com.kute.demo.dao.impl;
+package com.kute.demo.orm.jdbctemplate.dao.impl;
 
-import com.kute.demo.dao.IUserDao;
+import com.kute.demo.orm.jdbctemplate.dao.IUserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-@ImportResource(locations = {"classpath:spring-rest.xml"})
+@ImportResource(locations = {"classpath:spring.xml"})
 @RestController
 @EnableConfigurationProperties({PropertiesBean.class})
 @SpringBootApplication
