@@ -172,6 +172,13 @@
             <!--<version>5.5.1</version>-->
         <!--</dependency>-->
 
+        <!-- rocketmq -->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+
     </dependencies>
 
 	<build>
