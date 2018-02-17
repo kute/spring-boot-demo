@@ -1,4 +1,4 @@
-namespace java com.kute.demo.rpc.thrift.enums
+namespace java com.kute.demo.rpc.thrift.simple.enums
 
 enum status {
     PEED,  // 默认从0开始

@@ -1,4 +1,4 @@
-namespace java com.kute.demo.rpc.thrift.constant
+namespace java com.kute.demo.rpc.thrift.simple.constant
 
 include "Types.thrift"
 

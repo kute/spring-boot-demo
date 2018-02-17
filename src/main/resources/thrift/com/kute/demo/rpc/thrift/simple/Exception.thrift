@@ -1,4 +1,4 @@
-namespace java com.kute.demo.rpc.thrift.exception
+namespace java com.kute.demo.rpc.thrift.simple.exception
 
 exception InvalidOperation {
   1: i32 what,

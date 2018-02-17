@@ -1,4 +1,4 @@
-namespace java com.kute.demo.rpc.thrift.service
+namespace java com.kute.demo.rpc.thrift.simple.service
 
 include "Types.thrift"
 include "Status.thrift"

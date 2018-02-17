@@ -1,4 +1,4 @@
-namespace java com.kute.demo.rpc.thrift.domain
+namespace java com.kute.demo.rpc.thrift.simple.domain
 
 include "Types.thrift"
 
