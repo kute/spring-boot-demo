@@ -184,6 +184,17 @@
             <version>4.2.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.facebook.swift</groupId>
+            <artifactId>swift-codec</artifactId>
+            <version>0.23.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.facebook.swift</groupId>
+            <artifactId>swift-generator</artifactId>
+            <version>0.23.1</version>
+        </dependency>
+
     </dependencies>
 
 	<build>
@@ -195,6 +206,34 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
+            </plugin>
+            <!-- https://github.com/facebook/swift/tree/master/swift-maven-plugin -->
+            <plugin>
+                <groupId>com.facebook.mojo</groupId>
+                <artifactId>swift-maven-plugin</artifactId>
+                <version>0.23.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skip>false</skip>
+                    <idlFiles>
+                        <directory>${project.basedir}/src/main/resources/thrift/com/kute/demo/rpc/thrift/simple</directory>
+                        <includes>
+                            <include>**/*.thrift</include>
+                        </includes>
+                        <excludes>
+                            <exclude>**/other.thrift</exclude>
+                        </excludes>
+                    </idlFiles>
+                    <defaultPackage>${project.groupId}.demo.rpc.thrift.swift</defaultPackage>
+                    <outputFolder>${project.basedir}/src/main/java</outputFolder>
+                    <addCloseableInterface>true</addCloseableInterface>
+                </configuration>
             </plugin>
 		</plugins>
 	</build>
