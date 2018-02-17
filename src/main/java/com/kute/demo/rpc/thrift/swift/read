@@ -1,3 +1,33 @@
 1. https://github.com/facebook/swift
 
 2. https://github.com/facebook/swift/tree/master/swift-codec
+
+
+3. 生成方式（两种）
+
+3.1 maven 插件
+
+https://github.com/facebook/swift/tree/master/swift-maven-plugin
+
+在项目根目录执行
+
+mvn com.facebook.mojo:swift-maven-plugin:help
+
+mvn com.facebook.mojo:swift-maven-plugin:generate
+
+3.2 命令行
+
+https://github.com/facebook/swift/tree/master/swift-generator-cli
+
+在项目根目录下，先生成library
+
+mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get -DremoteRepositories=central::default::http://repo1.maven.apache.org/maven2 -Dartifact=com.facebook.swift:swift-generator-cli:RELEASE:jar:standalone -Ddest=/tmp/
+
+cp /tmp/swift-generator-cli-0.23.1-standalone.jar .
+
+然后在 src/main/resources/thrift/com/kute/demo/rpc/thrift/swift 下执行
+
+java -jar ./swift-generator-cli-0.23.1-standalone.jar -tweak ADD_THRIFT_EXCEPTION -tweak EXTEND_RUNTIME_EXCEPTION -tweak ADD_CLOSEABLE_INTERFACE ./*.thrift
+
+
+
