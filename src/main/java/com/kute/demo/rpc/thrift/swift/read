@@ -5,7 +5,7 @@
 
 3. 生成方式（两种）
 
-3.1 maven 插件
+3.1 maven 插件(直接在src/main/java生成源码)
 
 https://github.com/facebook/swift/tree/master/swift-maven-plugin
 
@@ -15,7 +15,7 @@ mvn com.facebook.mojo:swift-maven-plugin:help
 
 mvn com.facebook.mojo:swift-maven-plugin:generate
 
-3.2 命令行
+3.2 命令行（在当前目录下生成gen-swift,需要将生成的源码拷贝至src/main/java）
 
 https://github.com/facebook/swift/tree/master/swift-generator-cli
 

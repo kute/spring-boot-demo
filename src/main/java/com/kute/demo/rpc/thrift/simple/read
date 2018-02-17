@@ -7,4 +7,4 @@ http://www.cnblogs.com/cyfonly/p/6059374.html
 
 code generate in resource/thrift
 
-在 src/main/resources/thrift 目录下执行  thrift-gen-java.sh 脚本
+在 src/main/resources/thrift/com/kute/demo/rpc/thrift/simple 目录下执行  thrift-gen-java.sh 脚本
