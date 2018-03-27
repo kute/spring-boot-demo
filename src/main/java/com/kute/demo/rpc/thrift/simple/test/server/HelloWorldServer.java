@@ -3,6 +3,7 @@ package com.kute.demo.rpc.thrift.simple.test.server;
 import com.kute.demo.rpc.thrift.simple.service.HelloWorldService;
 import com.kute.demo.rpc.thrift.simple.service.impl.HelloWorldServiceImpl;
 import com.kute.demo.rpc.thrift.simple.test.client.HelloWorldClient;
+import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
