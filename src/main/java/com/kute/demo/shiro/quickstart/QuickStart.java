@@ -61,6 +61,7 @@ public class QuickStart {
 
         // 若 无角色，抛异常 UnauthorizedException
         currentUser.checkRole("admin");
+        logger.info("{}", currentUser.hasRole("白名单"));
 
         //判断 权限
         currentUser.isPermitted("aa");

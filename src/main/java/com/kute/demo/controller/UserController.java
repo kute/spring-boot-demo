@@ -3,7 +3,12 @@ package com.kute.demo.controller;
 import com.google.common.collect.Maps;
 import com.kute.demo.config.PropertiesBean;
 import com.kute.demo.po.UserData;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +21,8 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private static Map<String, UserData> map = Maps.newConcurrentMap();
 
