@@ -1,13 +1,10 @@
 package com.kute.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.base.Joiner;
-import com.kute.demo.service.IProductService;
 import com.kute.demo.service.IUserService;
 import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.Session;
@@ -16,7 +13,6 @@ import org.apache.shiro.util.Factory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,15 +32,15 @@ public class ShiroController {
     private static final Logger logger = LoggerFactory.getLogger(ShiroController.class);
 
     @Autowired
-    private IProductService productService;
-    @Autowired
     private IUserService userService;
 
     @Autowired
     private SecurityManager securityManager;
 
-    @RequestMapping(value = "/index/{user}", method = RequestMethod.GET, produces = "application/json")
-    public String index(@PathVariable String user) {
+    @RequestMapping(value = "/index/{user}/{operation}", method = RequestMethod.GET, produces = "application/json")
+    public String index(
+            @PathVariable String user,
+            @PathVariable String operation) {
 
         Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro/quickstart/shiro.ini");
         SecurityManager securityManager = factory.getInstance();
@@ -77,45 +73,43 @@ public class ShiroController {
         }
 
         logger.info("用户【{}】 认证成功", currentUser.getPrincipal());
-        logger.info("用户【{}】 has role【{}】 result 【{}】", user, "guest", currentUser.hasRole("guest"));
+
+        if("price".equals(operation)) {
+            doPriceTask(user);
+        } else if("room".equals(operation)) {
+            doRoom(user);
+        }
+
+        otherBussiness(user);
 
         Map<String , String > responseMap = new HashMap<>(2);
-
-        try {
-            productService.createProduct();
-        } catch(Exception e) {
-            logger.error("role is not allowed:{}, error:{}", user, e.getMessage());
-            responseMap.put("code", "-3");
-            responseMap.put("message", Joiner.on("").join("用户【", user, "】没有权限【body】"));
-            return JSONObject.toJSONString(responseMap);
-        }
-
-        try {
-            userService.updateInventory();
-        } catch(Exception e) {
-            logger.error("role is not allowed:{}, error:{}", user, e.getMessage());
-            responseMap.put("code", "-1");
-            responseMap.put("message", Joiner.on("").join("用户【", user, "】没有权限【body】"));
-            return JSONObject.toJSONString(responseMap);
-        }
-
-        try {
-            otherBussiness();
-        } catch(Exception e) {
-            logger.error("role is not allowed:{}, error:{}", user, e.getMessage());
-            responseMap.put("code", "-2");
-            responseMap.put("message", Joiner.on("").join("用户【", user, "】没有权限【girl】"));
-            return JSONObject.toJSONString(responseMap);
-        }
-
         responseMap.put("code", "1");
         responseMap.put("message", "Created");
         return JSONObject.toJSONString(responseMap);
     }
 
-//    @RequiresRoles(value = {"girl"})
-    private void otherBussiness() {
-        logger.info("do other business:{}", "ok");
+    private void doRoom(String caller) {
+        try {
+            userService.openRoom(caller);
+        } catch(Exception e) {
+            logger.error("role is not allowed for openRoom:{}, error:{}", caller, e.getMessage());
+        }
+    }
+
+    private void doPriceTask(String caller) {
+        try {
+            userService.updatePrice(caller);
+        } catch(Exception e) {
+            logger.error("role is not allowed for updatePrice:{}, error:{}", caller, e.getMessage());
+        }
+    }
+
+    private void otherBussiness(String caller) {
+        try {
+            userService.queryCommon(caller);
+        } catch(Exception e) {
+            logger.error("role【{}】 is not allowed for queryCommon, error:{}", caller, e.getMessage());
+        }
     }
 
 }

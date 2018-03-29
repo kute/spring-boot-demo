@@ -6,6 +6,10 @@ package com.kute.demo.service;
 public interface IUserService {
 
 
-    void updateInventory();
+    void openRoom(String caller);
+
+    void updatePrice(String caller);
+
+    void queryCommon(String caller);
 
 }
