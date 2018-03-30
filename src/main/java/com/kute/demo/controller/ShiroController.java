@@ -1,15 +1,14 @@
 package com.kute.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.kute.demo.service.IUserService;
+import com.kute.demo.service.IResourceService;
+import com.kute.demo.shiro.spring.util.TryCatchInterface;
 import io.swagger.annotations.Api;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.Factory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,20 +32,19 @@ public class ShiroController {
     private static final Logger logger = LoggerFactory.getLogger(ShiroController.class);
 
     @Autowired
-    private IUserService userService;
+    private IResourceService resourceService;
 
     @Autowired
     private SecurityManager securityManager;
 
-    @RequestMapping(value = "/index/{user}/{operation}", method = RequestMethod.GET, produces = "application/json")
-    public String index(
-            @PathVariable String user,
-            @PathVariable String operation) {
-
-        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro/quickstart/shiro.ini");
-        SecurityManager securityManager = factory.getInstance();
+    @PostConstruct
+    public void init() {
         SecurityUtils.setSecurityManager(securityManager);
+    }
 
+    @RequestMapping(value = "/index/{user}", method = RequestMethod.GET, produces = "application/json")
+    public String index(
+            @PathVariable String user) {
 
         // 创建 一个 匿名 用户
         Subject currentUser = SecurityUtils.getSubject();
@@ -72,15 +71,12 @@ public class ShiroController {
             }
         }
 
-        logger.info("用户【{}】 认证成功", currentUser.getPrincipal());
+        logger.debug("用户【{}】 认证成功", currentUser.getPrincipal());
 
-        if("price".equals(operation)) {
-            doPriceTask(user);
-        } else if("room".equals(operation)) {
-            doRoom(user);
-        }
-
-        otherBussiness(user);
+        execute(user, "updatePrice", u -> resourceService.updatePrice(u));
+        execute(user, "openRoom", u -> resourceService.openRoom(u));
+        execute(user, "queryCommon", u -> resourceService.queryCommon(u));
+        execute(user, "normalThing", u -> resourceService.normalThing(u));
 
         Map<String , String > responseMap = new HashMap<>(2);
         responseMap.put("code", "1");
@@ -88,28 +84,13 @@ public class ShiroController {
         return JSONObject.toJSONString(responseMap);
     }
 
-    private void doRoom(String caller) {
+    private void execute(String caller, String operation, TryCatchInterface tryCatchInterface) {
         try {
-            userService.openRoom(caller);
+            tryCatchInterface.execute(caller);
         } catch(Exception e) {
-            logger.error("role is not allowed for openRoom:{}, error:{}", caller, e.getMessage());
+            logger.error("user【{}】 is not allowed for {}, error:{}", caller, operation, e.getMessage());
         }
     }
 
-    private void doPriceTask(String caller) {
-        try {
-            userService.updatePrice(caller);
-        } catch(Exception e) {
-            logger.error("role is not allowed for updatePrice:{}, error:{}", caller, e.getMessage());
-        }
-    }
-
-    private void otherBussiness(String caller) {
-        try {
-            userService.queryCommon(caller);
-        } catch(Exception e) {
-            logger.error("role【{}】 is not allowed for queryCommon, error:{}", caller, e.getMessage());
-        }
-    }
 
 }

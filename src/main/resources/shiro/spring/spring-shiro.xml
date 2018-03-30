@@ -3,12 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="customRealm" class="com.kute.demo.shiro.spring.realm.CustomRealm">
-
-    </bean>
-
     <bean id="securityManager" class="org.apache.shiro.mgt.DefaultSecurityManager">
         <!--<property name="realm" ref="customRealm"/>-->
+        <property name="realms">
+            <list>
+                <ref bean="customRealm" />
+                <ref bean="otherRealm" />
+            </list>
+        </property>
     </bean>
 
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>

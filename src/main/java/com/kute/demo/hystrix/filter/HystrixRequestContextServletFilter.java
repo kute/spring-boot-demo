@@ -1,6 +1,8 @@
 package com.kute.demo.hystrix.filter;
 
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -11,9 +13,11 @@ import java.io.IOException;
  */
 public class HystrixRequestContextServletFilter implements Filter {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(HystrixRequestContextServletFilter.class);
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        LOGGER.info("Hystrix request context servlet init, config:{}", filterConfig);
     }
 
     @Override

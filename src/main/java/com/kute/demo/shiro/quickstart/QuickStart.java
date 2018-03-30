@@ -1,6 +1,7 @@
 package com.kute.demo.shiro.quickstart;
 
 import com.google.common.collect.Lists;
+import com.kute.demo.shiro.spring.util.AuthorizationEnum;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.config.IniSecurityManagerFactory;
@@ -70,6 +71,7 @@ public class QuickStart {
 
         currentUser.checkPermission("userService:create");
 
+        System.out.println(AuthorizationEnum.valueOf("DA"));
 
         // logout
         currentUser.logout();
