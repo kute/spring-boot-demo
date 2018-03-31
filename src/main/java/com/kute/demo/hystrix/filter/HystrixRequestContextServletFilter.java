@@ -3,6 +3,7 @@ package com.kute.demo.hystrix.filter;
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.io.IOException;
  * Hystrix请求上下文
  * Created by kute on 2017/12/10.
  */
+@Component
 public class HystrixRequestContextServletFilter implements Filter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HystrixRequestContextServletFilter.class);

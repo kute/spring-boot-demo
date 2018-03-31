@@ -37,10 +37,10 @@ public class ShiroController {
     @Autowired
     private SecurityManager securityManager;
 
-    @PostConstruct
-    public void init() {
-        SecurityUtils.setSecurityManager(securityManager);
-    }
+//    @PostConstruct
+//    public void init() {
+//        SecurityUtils.setSecurityManager(securityManager);
+//    }
 
     @RequestMapping(value = "/index/{user}", method = RequestMethod.GET, produces = "application/json")
     public String index(
