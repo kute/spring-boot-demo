@@ -3,8 +3,18 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">-->
+        <!--<property name="securityManager" ref="securityManager"/>-->
+        <!--<property name="filterChainDefinitions">-->
+            <!--<value>-->
+                <!--/shiro/** = anon-->
+            <!--</value>-->
+        <!--</property>-->
+    <!--</bean>-->
+
     <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
 
+    <!--<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">-->
     <bean id="securityManager" class="org.apache.shiro.mgt.DefaultSecurityManager">
         <!--<property name="realm" ref="customRealm"/>-->
         <property name="cacheManager" ref="cacheManager" />

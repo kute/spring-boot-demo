@@ -1,6 +1,7 @@
 package com.kute.demo.shiro.spring.realm;
 
 import com.google.common.base.Strings;
+import com.kute.demo.service.IResourceService;
 import com.kute.demo.service.IUpmService;
 import com.kute.demo.shiro.spring.util.AuthenticationUtil;
 import com.kute.demo.shiro.spring.util.AuthorizationEnum;
@@ -14,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 /**
  * 数据源
  * created by kute on 2018-03-28 12:56
@@ -23,7 +26,7 @@ public class CustomRealm extends AuthorizingRealm {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomRealm.class);
 
-    @Autowired
+    @Resource(name = "upmService")
     private IUpmService upmService;
 
     /**

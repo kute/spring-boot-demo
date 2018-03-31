@@ -43,6 +43,7 @@ public enum AuthorizationEnum {
                 }
             }
         }
+        System.out.println(map);
         return !Strings.isNullOrEmpty(mark) && map.containsKey(mark.trim().toUpperCase());
     }
 

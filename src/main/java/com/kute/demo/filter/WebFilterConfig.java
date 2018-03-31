@@ -29,7 +29,7 @@ public class WebFilterConfig extends FilterBeanFactory {
 //    public FilterRegistrationBean shiroFilterRegistration() {
 //        FilterRegistrationBean registration = new FilterRegistrationBean();
 //        registration.setFilter(delegatingFilterProxy());
-//        registration.addUrlPatterns("/*");
+//        registration.addUrlPatterns("/shiro/*");
 //        registration.addInitParameter("targetFilterLifecycle", "true");
 //        registration.setName("delegatingFilterProxy");
 //        registration.setOrder(2);
