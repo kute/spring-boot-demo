@@ -88,7 +88,7 @@ public class ShiroController {
         try {
             tryCatchInterface.execute(caller);
         } catch(Exception e) {
-            logger.error("user【{}】 is not allowed for {}, error:{}", caller, operation, e);
+            logger.error("user【{}】 is not allowed for {}, error:{}", caller, operation, e.getMessage());
         }
     }
 

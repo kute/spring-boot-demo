@@ -21,13 +21,15 @@ import javax.annotation.Resource;
  * 数据源
  * created by kute on 2018-03-28 12:56
  */
-@Component
 public class CustomRealm extends AuthorizingRealm {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomRealm.class);
 
-    @Resource(name = "upmService")
     private IUpmService upmService;
+
+    public void setUpmService(IUpmService upmService) {
+        this.upmService = upmService;
+    }
 
     /**
      * 执行 授权

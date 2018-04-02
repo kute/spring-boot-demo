@@ -12,12 +12,21 @@
         <!--</property>-->
     <!--</bean>-->
 
-    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+    <bean id="upmService" class="com.kute.demo.service.impl.UpmService" />
+
+    <bean id="customRealm" class="com.kute.demo.shiro.spring.realm.CustomRealm">
+        <property name="upmService" ref="upmService" />
+    </bean>
+
+    <!-- guava local cache -->
+    <bean id="loadingCacheManager" class="com.kute.demo.shiro.spring.util.LoadingCacheManager" />
+
+    <!-- memory local cache -->
+    <!--<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />-->
 
     <!--<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">-->
     <bean id="securityManager" class="org.apache.shiro.mgt.DefaultSecurityManager">
-        <!--<property name="realm" ref="customRealm"/>-->
-        <property name="cacheManager" ref="cacheManager" />
+        <property name="cacheManager" ref="loadingCacheManager" />
         <property name="realms">
             <list>
                 <ref bean="customRealm" />

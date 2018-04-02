@@ -13,7 +13,6 @@ import java.util.Set;
 /**
  * Created by kute on 2017/12/9.
  */
-@Service("upmService")
 public class UpmService extends AbstractService implements IUpmService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UpmService.class);
