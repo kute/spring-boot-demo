@@ -71,7 +71,6 @@ public class QuickStart {
 
         currentUser.checkPermission("userService:create");
 
-        System.out.println(AuthorizationEnum.valueOf("DA"));
 
         // logout
         currentUser.logout();

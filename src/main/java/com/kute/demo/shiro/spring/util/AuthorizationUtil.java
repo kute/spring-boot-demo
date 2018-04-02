@@ -1,6 +1,8 @@
 package com.kute.demo.shiro.spring.util;
 
 import com.google.common.collect.Sets;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 
 import java.util.Set;
 
