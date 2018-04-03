@@ -48,7 +48,7 @@ public class ResourceService extends AbstractService implements IResourceService
      * 切面方式实现
      * @param caller
      */
-    @OperationAuthorization
+    @OperationAuthorization(permissionAny = {"fruit:apple:eat"})
     @Override
     public void queryCommon(String caller) {
         LOGGER.info("user【{}】can execute query common[permission=fruit:apple:eat]", caller);
