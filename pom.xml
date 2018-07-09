@@ -275,36 +275,48 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
             </plugin>
-
-            <!-- https://github.com/facebook/swift/tree/master/swift-maven-plugin -->
             <plugin>
-                <groupId>com.facebook.mojo</groupId>
-                <artifactId>swift-maven-plugin</artifactId>
-                <version>0.23.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
                 <configuration>
-                    <skip>false</skip>
-                    <idlFiles>
-                        <directory>${project.basedir}/src/main/resources/thrift/com/kute/demo/rpc/thrift/swift</directory>
-                        <includes>
-                            <include>**/*.thrift</include>
-                        </includes>
-                        <excludes>
-                            <exclude>**/Types.thrift</exclude>
-                        </excludes>
-                    </idlFiles>
-                    <outputFolder>${project.basedir}/src/main/java</outputFolder>
-                    <!--<defaultPackage>${project.groupId}.demo.rpc.thrift.swift</defaultPackage>-->
-                    <addCloseableInterface>true</addCloseableInterface>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>utf-8</encoding>
+                    <fork>true</fork>
+                    <meminitial>512m</meminitial>
+                    <maxmem>1048m</maxmem>
                 </configuration>
             </plugin>
+            <!-- https://github.com/facebook/swift/tree/master/swift-maven-plugin -->
+            <!--<plugin>-->
+                <!--<groupId>com.facebook.mojo</groupId>-->
+                <!--<artifactId>swift-maven-plugin</artifactId>-->
+                <!--<version>0.23.1</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>generate</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<skip>false</skip>-->
+                    <!--<idlFiles>-->
+                        <!--<directory>${project.basedir}/src/main/resources/thrift/com/kute/demo/rpc/thrift/swift</directory>-->
+                        <!--<includes>-->
+                            <!--<include>**/*.thrift</include>-->
+                        <!--</includes>-->
+                        <!--<excludes>-->
+                            <!--<exclude>**/Types.thrift</exclude>-->
+                        <!--</excludes>-->
+                    <!--</idlFiles>-->
+                    <!--<outputFolder>${project.basedir}/src/main/java</outputFolder>-->
+                    <!--&lt;!&ndash;<defaultPackage>${project.groupId}.demo.rpc.thrift.swift</defaultPackage>&ndash;&gt;-->
+                    <!--<addCloseableInterface>true</addCloseableInterface>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <!--
             检查项目依赖/插件更新版本
             mvn versions:display-dependency-updates

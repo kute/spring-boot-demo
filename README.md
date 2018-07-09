@@ -1,1 +1,1 @@
-# spring-boot-demo
+# spring-boot-demo [![Build Status](https://www.travis-ci.org/kute/spring-boot-demo.svg?branch=master)](https://www.travis-ci.org/kute/spring-boot-demo)  [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kuteforwhy/forwhy)
