@@ -15,9 +15,11 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
@@ -38,23 +40,25 @@ public class OperationAuthorizationAspect {
 
         Method method = methodSignature.getMethod();
 
-        if(null != method) {
+        if (null != method) {
             String methodName = method.getName();
             LOGGER.info("checkRolesOrPermissions methodName[{}] begin", methodName);
 
-            OperationAuthorization operationAuthorization = method.getAnnotation(OperationAuthorization.class);
-            if(null != operationAuthorization && operationAuthorization.enabled()) {
+            // 工具类
+            OperationAuthorization operationAuthorization = AnnotationUtils.getAnnotation(method, OperationAuthorization.class);
+//            OperationAuthorization operationAuthorization = method.getAnnotation(OperationAuthorization.class);
+            if (null != operationAuthorization && operationAuthorization.enabled()) {
 
                 Subject subject = SecurityUtils.getSubject();
-                if(!subject.isAuthenticated()) {
+                if (!subject.isAuthenticated()) {
                     LOGGER.warn("Subject[{}] checkRolesOrPermissions for method[{}] is not authenticated", subject, methodName);
                     return;
                 }
 
                 String[] rolesAll = operationAuthorization.rolesAll();
-                if(rolesAll.length > 0) {
+                if (rolesAll.length > 0) {
                     Boolean hasAllRoles = subject.hasAllRoles(Sets.newHashSet());
-                    if(!hasAllRoles) {
+                    if (!hasAllRoles) {
                         throw new UnauthorizedException(Joiner.on("").join(
                                 "Subject[", subject, "] does not have all roles [", Arrays.toString(rolesAll), "]"));
                     }
@@ -62,27 +66,27 @@ public class OperationAuthorizationAspect {
 
                 String[] rolesAny = operationAuthorization.rolesAny();
 
-                if(rolesAny.length > 0) {
+                if (rolesAny.length > 0) {
                     boolean[] rolesAnyResult = subject.hasRoles(Lists.newArrayList(rolesAny));
-                    if(!Booleans.contains(rolesAnyResult, true)) {
+                    if (!Booleans.contains(rolesAnyResult, true)) {
                         throw new UnauthorizedException(Joiner.on("").join(
                                 "Subject[", subject, "] does not have any role [", Arrays.toString(rolesAny), "]"));
                     }
                 }
 
                 String[] permissionAll = operationAuthorization.permissionAll();
-                if(permissionAll.length > 0) {
+                if (permissionAll.length > 0) {
                     Boolean hasAllPermissions = subject.isPermittedAll(permissionAll);
-                    if(!hasAllPermissions) {
+                    if (!hasAllPermissions) {
                         throw new UnauthorizedException(Joiner.on("").join(
                                 "Subject[", subject, "] does not have all permissions [", Arrays.toString(permissionAll), "]"));
                     }
                 }
 
                 String[] permissionAny = operationAuthorization.permissionAny();
-                if(permissionAny.length > 0) {
+                if (permissionAny.length > 0) {
                     boolean[] permissionAnyResult = subject.isPermitted(permissionAny);
-                    if(!Booleans.contains(permissionAnyResult, true)) {
+                    if (!Booleans.contains(permissionAnyResult, true)) {
                         throw new UnauthorizedException(Joiner.on("").join(
                                 "Subject[", subject, "] does not have any permission [", Arrays.toString(permissionAny), "]"));
                     }
@@ -92,7 +96,15 @@ public class OperationAuthorizationAspect {
             LOGGER.info("checkRolesOrPermissions methodName[{}] end", methodName);
         }
 
+    }
 
+    private OperationAuthorization getAnnotation(Object obj) {
+        if(obj instanceof Method) {
+            return AnnotationUtils.findAnnotation((Method) obj, OperationAuthorization.class);
+        } else if(obj instanceof AnnotatedElement) {
+            return AnnotationUtils.getAnnotation((AnnotatedElement) obj, OperationAuthorization.class);
+        }
+        return null;
     }
 
 }

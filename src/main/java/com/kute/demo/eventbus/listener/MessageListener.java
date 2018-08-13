@@ -16,7 +16,7 @@ public class MessageListener {
 
     @Subscribe
     public void handler(MessageEvent messageEvent) {
-        logger.info(messageEvent.toString());
+        logger.debug(messageEvent.toString());
     }
 
 }

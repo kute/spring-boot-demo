@@ -4,6 +4,7 @@ import com.kute.demo.service.AbstractService;
 import com.kute.demo.service.IResourceService;
 import com.kute.demo.shiro.spring.annotation.OperationAuthorization;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;

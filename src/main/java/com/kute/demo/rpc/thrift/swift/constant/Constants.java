@@ -10,8 +10,8 @@ public final class Constants
     }
 
     public static final Map<String, String> MAP_CONST = ImmutableMap.<String, String>builder()
-        .put("hello", "world")
         .put("goodnight", "moon")
+        .put("hello", "world")
         .build();
 
     public static final double VERSION = 1.0;

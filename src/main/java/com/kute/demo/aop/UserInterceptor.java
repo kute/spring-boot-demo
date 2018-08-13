@@ -27,7 +27,9 @@ public class UserInterceptor {
     @Around("execution(* com.kute.demo.controller..*(..))")
     public Object controllerPointcut(ProceedingJoinPoint pjp){
 
-        logger.debug("Begin go in around pointcut...");
+        // 方法所在类
+        String value = pjp.getTarget().getClass().getName();
+        logger.debug("Begin go in around pointcut...{}");
         MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
         Method method = methodSignature.getMethod();
         String methodName = method.getName();

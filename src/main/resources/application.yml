@@ -1,0 +1,19 @@
+# @see spring-configuration-metadata.json
+
+app:
+  name: spring-boot-app
+
+server:
+  port: 8080
+
+# 指明当前生效的环境: application-test.properties
+spring:
+  profiles:
+    active: test
+# 终端日志彩色输出
+  output:
+    ansi:
+      enabled: detect
+
+debug: false
+

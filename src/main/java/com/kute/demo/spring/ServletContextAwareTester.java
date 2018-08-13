@@ -2,8 +2,10 @@ package com.kute.demo.spring;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletContext;
 
@@ -20,6 +22,7 @@ public class ServletContextAwareTester implements ServletContextAware {
     @Override
     public void setServletContext(ServletContext servletContext) {
         logger.debug("spring interface setServletContext:{}", servletContext.getClass().getSimpleName());
+        ApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
         this.servletContext = servletContext;
     }
 }

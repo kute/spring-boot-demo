@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -19,9 +22,15 @@ import java.sql.SQLException;
  * Created by kute on 2018/1/11.
  */
 @Configuration
+@EnableTransactionManagement
 public class DataSourceProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(DataSourceProvider.class);
+
+    @Bean
+    public PlatformTransactionManager platformTransactionManager() {
+        return new DataSourceTransactionManager(masterDataSource());
+    }
 
     @Bean(name = "masterJdbcTemplate")
     @Primary // 使用 主 数据源

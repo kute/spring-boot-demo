@@ -2,6 +2,7 @@ package com.kute.demo.filter;
 
 import com.kute.demo.hystrix.filter.HystrixRequestContextServletFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ public class WebFilterConfig extends FilterBeanFactory {
     @Autowired
     private HystrixRequestContextServletFilter hystrixRequestContextServletFilter;
 
+    @ConditionalOnBean
     @Bean
     public FilterRegistrationBean hystrixRequestContextServletFilterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();

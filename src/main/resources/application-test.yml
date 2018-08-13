@@ -1,0 +1,70 @@
+app:
+    name: spring-boot-app
+com:
+    kute:
+        blog:
+            bignumber: ${random.long}
+            number: ${random.int}
+            test1: ${random.int(10)}
+            test2: ${random.int[10,20]}
+            value: ${random.value}
+current:
+    env:
+        name: ${app.name}-test
+logging:
+    level:
+        org:
+            springframework:
+                security: INFO
+management:
+    security:
+        enabled: false
+mysql:
+    datasource:
+        master:
+            driver-class-name: com.mysql.jdbc.Driver
+            password: root
+            pool-size: 30
+            url: jdbc:mysql://localhost:3306/masterdb?characterEncoding=utf8&useSSL=false
+            username: root
+        master2:
+            driver-class-name: com.mysql.jdbc.Driver
+            password: root
+            pool-size: 30
+            url: jdbc:mysql://localhost:3306/masterdb2?characterEncoding=utf8&useSSL=false
+            username: root
+        slave:
+            driver-class-name: com.mysql.jdbc.Driver
+            password: root
+            pool-size: 30
+            url: jdbc:mysql://localhost:3306/slavedb?characterEncoding=utf8&useSSL=false
+            username: root
+security:
+    basic:
+        enabled: false
+    ignored: /**
+server:
+    port: 8080
+spring:
+    batch:
+        job:
+            enabled: false
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        password: root
+        url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&useSSL=false
+        username: root
+    # sping batch, 是否在启动时执行所有的job
+    security:
+        enabled: false
+#    reids config
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      pool:
+        max-active: 50
+        max-idle: 100
+        min-idle: 10
+        max-wait: 3000
+      password: kuteredis
+      timeout: 5000

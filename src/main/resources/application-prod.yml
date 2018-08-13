@@ -1,0 +1,4 @@
+app:
+    name: spring-boot-app
+server:
+    port: 8080

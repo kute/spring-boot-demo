@@ -3,9 +3,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <import resource="spring-beans.xml" />
-    <import resource="spring-rest.xml" />
-    <import resource="spring-rest-simple.xml" />
+    <!--此配置文件 只是用来 测试 spring xml配置的方式-->
+    <import resource="spring/spring-beans.xml" />
+    <import resource="spring/spring-rest.xml" />
+    <import resource="spring/spring-rest-simple.xml" />
 
     <import resource="shiro/spring/spring-shiro.xml" />
 
