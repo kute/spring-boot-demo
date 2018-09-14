@@ -10,11 +10,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 数据源配置
@@ -26,6 +29,23 @@ import java.sql.SQLException;
 public class DataSourceProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(DataSourceProvider.class);
+
+    /**
+     * 动态切换数据源
+     * @return
+     */
+    @Bean
+    public AbstractRoutingDataSource roundRobinDataSouceProxy() {
+        SpareRoutingDataSource proxy = new SpareRoutingDataSource();
+        Map<Object, Object> targetDataSources = new HashMap<Object, Object>();
+        //主 写
+        targetDataSources.put(DynamicDataSourceHolder.DataSourceType.MASTER.name, masterDataSource());
+        //从 读
+        targetDataSources.put(DynamicDataSourceHolder.DataSourceType.SLAVE.name, slaveDataSource());
+        proxy.setDefaultTargetDataSource(masterDataSource());
+        proxy.setTargetDataSources(targetDataSources);
+        return proxy;
+    }
 
     @Bean
     public PlatformTransactionManager platformTransactionManager() {
