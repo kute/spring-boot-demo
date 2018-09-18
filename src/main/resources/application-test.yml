@@ -68,3 +68,5 @@ spring:
         max-wait: 3000
       password: kuteredis
       timeout: 5000
+      database: 1
+      name: kute

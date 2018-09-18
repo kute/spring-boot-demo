@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * created by bailong001 on 2018/09/14 10:16
+ * created by kute on 2018/09/14 10:16
  */
 @Aspect
 @Component
@@ -19,9 +19,7 @@ public class DataSourceAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceAspect.class);
 
-    private final String EXPRESSION = "@annotation(com.kute.demo.annotation.DataSource)";
-
-    @Around(EXPRESSION)
+    @Around(value = "@annotation(com.kute.demo.annotation.DataSource) && @annotation(dataSource)")
     public Object proceed(ProceedingJoinPoint proceedingJoinPoint, DataSource dataSource) throws Throwable {
         try {
             if (null != dataSource && !Strings.isNullOrEmpty(dataSource.value())) {
