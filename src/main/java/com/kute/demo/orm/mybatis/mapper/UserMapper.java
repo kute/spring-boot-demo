@@ -1,5 +1,6 @@
 package com.kute.demo.orm.mybatis.mapper;
 
+import com.kute.demo.annotation.DataSource;
 import com.kute.demo.po.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,8 +11,10 @@ import java.util.List;
  */
 public interface UserMapper {
 
+    @DataSource("slave")
     List<User> getAllUser();
 
+    @DataSource("slave")
     User getById(@Param("id") Integer id);
 
 }
