@@ -1,5 +1,7 @@
 package com.kute.demo.annotation;
 
+import com.kute.demo.datasource.route.DynamicDataSourceHolder;
+
 import java.lang.annotation.*;
 
 @Target({ElementType.TYPE, ElementType.METHOD})
@@ -9,7 +11,7 @@ public @interface DataSource {
 
     /**
      * 数据源key
-     * @see com.kute.demo.datasource.DynamicDataSourceHolder.DataSourceType
+     * @see DynamicDataSourceHolder.DataSourceType
      * @return
      */
     String value() default "master";

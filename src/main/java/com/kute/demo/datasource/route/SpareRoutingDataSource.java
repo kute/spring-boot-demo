@@ -1,4 +1,4 @@
-package com.kute.demo.datasource;
+package com.kute.demo.datasource.route;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

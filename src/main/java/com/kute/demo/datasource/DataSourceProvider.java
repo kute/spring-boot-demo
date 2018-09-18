@@ -1,5 +1,7 @@
 package com.kute.demo.datasource;
 
+import com.kute.demo.datasource.route.DynamicDataSourceHolder;
+import com.kute.demo.datasource.route.SpareRoutingDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,7 +36,7 @@ public class DataSourceProvider {
      * 动态切换数据源
      * @return
      */
-    @Bean
+    @Bean("roundRobinDataSouceProxy")
     public AbstractRoutingDataSource roundRobinDataSouceProxy() {
         SpareRoutingDataSource proxy = new SpareRoutingDataSource();
         Map<Object, Object> targetDataSources = new HashMap<Object, Object>();

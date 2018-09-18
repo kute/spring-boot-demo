@@ -17,9 +17,9 @@ import org.springframework.stereotype.Component;
  * prefix:  spring.datasource
  */
 @Component
-public class DataSourceInitializer implements ApplicationListener<DataSourceInitializedEvent> {
+public class DataSourceInitializerEventListener implements ApplicationListener<DataSourceInitializedEvent> {
 
-    private static final Logger logger = LoggerFactory.getLogger(DataSourceInitializer.class);
+    private static final Logger logger = LoggerFactory.getLogger(DataSourceInitializerEventListener.class);
 
     @Autowired
     private ConfigurableApplicationContext applicationContext;
