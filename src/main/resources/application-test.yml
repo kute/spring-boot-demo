@@ -60,7 +60,7 @@ spring:
 #    reids config
     redis:
       host: 127.0.0.1
-      port: 6379
+      port: 6380
       pool:
         max-active: 50
         max-idle: 100

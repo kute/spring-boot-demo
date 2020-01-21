@@ -66,9 +66,9 @@ public class SpringCacheRedisConfig extends CachingConfigurerSupport {
     }
 
     @Bean
-    public RedisTemplate<Serializable, Serializable> redisTemplate() {
+    public RedisTemplate<String, String> redisTemplate() {
 
-        RedisTemplate<Serializable, Serializable> redisTemplate = new RedisTemplate<>();
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
         redisTemplate.setKeySerializer(stringRedisSerializer);
         redisTemplate.setHashKeySerializer(stringRedisSerializer);
