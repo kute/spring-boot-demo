@@ -1,2 +1,0 @@
-# 监听 spring boot 启动过程中的生命周期事件
-org.springframework.boot.SpringApplicationRunListener=com.kute.demo.lifecycle.ApplicationRunListener
